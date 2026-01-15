@@ -1,0 +1,19 @@
+# AI Agent Metadata
+.gemini/
+.claude/
+.agent/
+.antigravity/
+
+# BMAD Internal (Optional: keep if you want to commit configs)
+# _bmad/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# other
+_bmad/
