@@ -1,0 +1,6 @@
+<linker>
+  <assembly fullname="Zenject" preserve="all"/>
+  <assembly fullname="Zenject-usage" preserve="all"/>
+  <!-- Add your game assemblies here if you use reflection-based injection -->
+  <assembly fullname="Assembly-CSharp" preserve="all"/>
+</linker>
