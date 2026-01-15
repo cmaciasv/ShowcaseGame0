@@ -20,7 +20,20 @@ Deliver a sensory-rich arcade experience where every collision feels impactful. 
 - **Input:** New Unity Input System (Cross-platform support)
 
 ## 📁 Project Structure
-The project follows a strict "clean" hierarchy:
+The project follows a split structure between the Unity project and the BMAD metadata:
+```
+ShowcaseGame0/
+├── unityproject/      # The actual Unity project
+│   ├── Assets/        # Game assets and scripts
+│   ├── .gitignore     # Unity-specific gitignore
+│   └── ...
+├── _bmad/             # Agent metadata and workflows
+├── _bmad-output/      # Planning and design artifacts
+└── README.md
+```
+
+### Unity Project Structure
+Inside `unityproject/Assets/_Game/`:
 ```
 Assets/_Game/
 ├── _Config/      # ScriptableObjects and Game Settings
@@ -37,9 +50,9 @@ Assets/_Game/
 
 ## ⚙️ Setup & Development
 1. **Clone the repository.**
-2. **Open with Unity Hub** (Target: WebGL).
+2. **Open the `unityproject` folder with Unity Hub** (Target: WebGL).
 3. **Import Zenject/Extenject** from the Asset Store.
-4. **Ensure IL2CPP stripping** is handled via the included `Assets/link.xml`.
+4. **Ensure IL2CPP stripping** is handled via the included `unityproject/Assets/link.xml`.
 
 ## 📈 Roadmap
 - [x] Architecture Planning
