@@ -25,8 +25,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<LoseState>().AsSingle();
 
         // 5. Bind Entities (In Hierarchy)
-        // We use FromComponentInHierarchy so Zenject can find the paddle in the scene
-        // and inject its dependencies (like IInputReader).
+        // We use FromComponentInHierarchy so Zenject can find these in the scene
         Container.BindInterfacesAndSelfTo<PaddleController>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<BallController>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<LevelManager>().FromComponentInHierarchy().AsSingle();
     }
 }

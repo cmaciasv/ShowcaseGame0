@@ -9,6 +9,9 @@ public class BuildScript
     {
         string buildPath = "Build/WebGL";
         
+        // Disable compression to avoid "Content-Encoding: gzip" server header issues during local testing
+        PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+        
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = new[] { EditorBuildSettings.scenes[0].path };
         buildPlayerOptions.locationPathName = buildPath;
