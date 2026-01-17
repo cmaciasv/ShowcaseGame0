@@ -17,6 +17,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
         Container.Bind<ILogger>().To<DebugLogger>().AsSingle();
         Container.BindInterfacesAndSelfTo<InputReader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ScoreManager>().AsSingle();
 
         // 4. Bind Game States
         Container.Bind<MenuState>().AsSingle();
@@ -29,5 +30,6 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PaddleController>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<BallController>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<LevelManager>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<HazardZone>().FromComponentInHierarchy().AsSingle();
     }
 }

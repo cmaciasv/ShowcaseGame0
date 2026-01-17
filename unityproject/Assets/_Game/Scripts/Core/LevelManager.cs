@@ -12,12 +12,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Vector2 _offset = new Vector2(-5f, 3f);
 
     private DiContainer _container;
+    private ScoreManager _scoreManager;
     private List<GameObject> _spawnedBricks = new List<GameObject>();
 
     [Inject]
-    public void Construct(DiContainer container)
+    public void Construct(DiContainer container, ScoreManager scoreManager)
     {
         _container = container;
+        _scoreManager = scoreManager;
     }
 
     private void Start()
@@ -42,9 +44,24 @@ public class LevelManager : MonoBehaviour
                     0
                 );
 
-                GameObject brick = _container.InstantiatePrefab(_brickPrefab, spawnPos, Quaternion.identity, transform);
+                GameObject brick;
+                // Use Zenject Container in Play Mode, standard Instantiate in Editor (Edit Mode)
+                if (_container != null)
+                {
+                    brick = _container.InstantiatePrefab(_brickPrefab, spawnPos, Quaternion.identity, transform);
+                }
+                else
+                {
+                    brick = Instantiate(_brickPrefab, spawnPos, Quaternion.identity, transform);
+                }
+                
                 _spawnedBricks.Add(brick);
             }
+        }
+
+        if (_scoreManager != null)
+        {
+            _scoreManager.Reset(_spawnedBricks.Count);
         }
     }
 
@@ -52,7 +69,13 @@ public class LevelManager : MonoBehaviour
     {
         foreach (var brick in _spawnedBricks)
         {
-            if (brick != null) Destroy(brick);
+            if (brick != null)
+            {
+                if (Application.isPlaying)
+                    Destroy(brick);
+                else
+                    DestroyImmediate(brick);
+            }
         }
         _spawnedBricks.Clear();
     }

@@ -4,6 +4,8 @@ using Zenject;
 public interface IGameManager
 {
     void StartGame();
+    void WinGame();
+    void LoseGame();
     void ChangeState(IGameState newState);
 }
 
@@ -12,7 +14,7 @@ public class GameManager : IGameManager, IInitializable, ITickable
     private IGameState _currentState;
     private readonly ILogger _logger;
     
-    [Inject] private MenuState _menuState;
+    [Inject] public MenuState _menuState;
     [Inject] private GameplayState _gameplayState;
     [Inject] private WinState _winState;
     [Inject] private LoseState _loseState;
@@ -36,7 +38,19 @@ public class GameManager : IGameManager, IInitializable, ITickable
     public void StartGame()
     {
         _logger.LogInfo("Starting Game...");
-        // This will be called by UI or initial trigger
+        ChangeState(_gameplayState);
+    }
+
+    public void WinGame()
+    {
+        _logger.LogInfo("Game Won!");
+        ChangeState(_winState);
+    }
+
+    public void LoseGame()
+    {
+        _logger.LogInfo("Game Lost!");
+        ChangeState(_loseState);
     }
 
     public void ChangeState(IGameState newState)
